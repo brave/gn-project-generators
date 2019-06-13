@@ -370,7 +370,9 @@ class ProjectGenerator:
 
             elif target.type == TargetType.create_bundle:
 
-                if (target.bundle_data.get("product_type", "") == "com.apple.product-type.application"):
+                product_type = target.bundle_data.get("product_type", "")
+                if (product_type == "com.apple.product-type.application" or
+                    product_type == "com.apple.product-type.framework"):
                     root_dir_output = target.bundle_data["root_dir_output"]
                     app_dir, app_name = posixpath.split(root_dir_output)
                     if app_name == "Contents": # newer gn verison includes Contents
